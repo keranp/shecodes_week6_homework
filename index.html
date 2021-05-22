@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <form id="city-form">
+        <input type="city" id="city-input" placeholder="Enter a City">
+        <input type="submit" value="Submit">
+      </form>
+    <h1></h1>
+    <h2></h2>
+    <a href="" class="current">Show my current location and temperature</a>
+    <script>
+
+function showCity(event) {
+        event.preventDefault();
+        let cityInput = document.querySelector("#city-input");
+        let heading = document.querySelector("h1");
+        heading.innerHTML = cityInput.value;
+        let apiKey = "b88eabe092495ecc2cc1a7f39638c8a7";
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&appid=${apiKey}&units=metric`;
+    axios.get(url).then(currentTemp);
+      }
+
+      function currentTemp(response) {
+        console.log(response.data.main);
+        let temp = Math.round(response.data.main.temp);
+        console.log(temp);
+        let h2 = document.querySelector("h2");
+        h2.innerHTML = "It is " + temp + " degrees"
+    }
+
+      let cityForm = document.querySelector("#city-form");
+      cityForm.addEventListener("submit", showCity);
+
+    
+
+      
+    
+
+
+
+
+
+    </script>
+
+</body>
+</html>
